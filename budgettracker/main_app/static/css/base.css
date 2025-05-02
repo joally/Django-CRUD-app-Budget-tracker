@@ -1,0 +1,56 @@
+.butterfly {
+    position: relative;
+    width: 120px;
+    height: 80px;
+    margin: 100px auto;
+  }
+  
+  .wing {
+    width: 60px;
+    height: 80px;
+    background: radial-gradient(circle at 30% 30%, #ffb6c1, #e75480);
+    border-radius: 50% 50% 50% 50%;
+    position: absolute;
+    top: 0;
+    transition: transform 0.3s ease;
+  }
+  
+  .left {
+    left: 0;
+    transform-origin: right center;
+  }
+  
+  .right {
+    right: 0;
+    transform-origin: left center;
+  }
+  
+  .body {
+    width: 20px;
+    height: 80px;
+    background: black;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    z-index: 1;
+  }
+  
+  .butterfly:hover .left {
+    animation: flap-left 0.4s infinite alternate;
+  }
+  
+  .butterfly:hover .right {
+    animation: flap-right 0.4s infinite alternate;
+  }
+  
+  @keyframes flap-left {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-25deg); }
+  }
+  
+  @keyframes flap-right {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(25deg); }
+  }
+  
