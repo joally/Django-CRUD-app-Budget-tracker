@@ -10,3 +10,9 @@ def about(request):
     return  render(request, 'about.html',{
         'contact': contact_details
         })
+    
+def index(request):
+    return render(request,'budget/index.html')
+
+def add_expenses(request):
+    return render(request,'add_expenses.html')
