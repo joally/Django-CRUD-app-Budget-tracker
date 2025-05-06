@@ -1,23 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    <div class="container py-4">
-<h1>Expenses List</h1>
-<div class="row justify-content-center">
-      <div class="col-md-8">
-<ul class="list-group">
-    {% for expense in expenses %}
-        <li class="list-group-item">
-            {{ expense.name }} - ${{ expense.amount }} - {{ expense.date }} (Category: {{ expense.category.name }})
-        </li>
-       
-    {% empty %}
-        <li class="list-group-item">No expenses to show.</li>
-    {% endfor %}
-            </ul>
-         </div>
+    
+    <body>
+
+        <br>
+        <br>
+
+        <div class="text-center">
+
+            <h3> Budget Management at it's finest! </h3>
+
+            <br>
+
+            <h5> Keep track of your records effectively! </h5>
+
+            <hr>
+            <br>
+
+            <a class="btn btn-primary" type="button" href="{% url 'register' %}"> Create your account &nbsp; <i class="fa fa-user-plus" aria-hidden="true"></i> </a>
+
         </div>
-    </div>
-</main>
+
+    </body>        
+
+
 {% endblock %}
