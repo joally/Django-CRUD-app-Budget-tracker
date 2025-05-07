@@ -1,6 +1,7 @@
 
+from main_app.forms import CreateRecordForm
 from django.shortcuts import render, redirect
-from main_app.forms import CreateUserForm, LoginForm
+from main_app.forms import CreateUserForm, LoginForm, UpdateRecordForm
 from django.contrib.auth.forms import AuthenticationForm 
 from django import forms
 from django.contrib.auth.models import auth
@@ -61,15 +62,6 @@ def my_login(request):
 
     return render(request, 'authentication/my_login.html', {'form':form})
 
-# - User logout
-
-def user_logout(request):
-
-    auth.logout(request)
-
-    messages.success(request, "Logout success!")
-
-    return redirect("my_login")
 
 
 
@@ -103,8 +95,65 @@ def create_record(request):
 
             messages.success(request, "Your record was created!")
 
-            return redirect("my_login")
+            return redirect("dashboard")
 
     context = {'form': form}
 
     return render(request, 'create-record.html', context=context)
+
+
+
+
+@login_required(login_url='my_login')
+def update_record(request, pk):
+    record=Record.objects.get(id=pk)
+
+    form = UpdateRecordForm(instance=record)
+
+    if request.method == "POST":
+
+        form = UpdateRecordForm(request.POST,instance=record)
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(request, "Your record was updated!")
+
+            return redirect("dashboard")
+
+    context = {'form': form}
+
+    return render(request, 'update-record.html', context=context)
+
+
+@login_required(login_url='my_login')
+def singular_record(request, pk):
+    
+    all_records=Record.objects.get(id=pk)
+    
+    context = {'record': all_records}
+    
+    return render(request,'main_app/view-record.html', context=context)
+
+
+
+
+@login_required(login_url='my_login')
+def delete_record(request, pk):
+
+    record=Record.objects.get(id=pk)
+    
+    record.delete()
+    
+    return redirect('dashboard')
+
+# - User logout
+
+def user_logout(request):
+
+    auth.logout(request)
+
+    messages.success(request, "Logout success!")
+
+    return redirect("my_login")

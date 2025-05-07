@@ -8,22 +8,43 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms.widgets import PasswordInput, TextInput
 
+class StyledForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({
+                'class': 'form-control rounded-custom'
+            })
+
+class StyledModelForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({
+                'class': 'form-control rounded-custom'
+            })
 
 
 
 
-class CreateUserForm(UserCreationForm):
+class CreateUserForm(StyledForm, UserCreationForm):
     class Meta:
         model= User
         fields= ['username', 'password1', 'password2']
         
-class LoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({
+                'class': 'form-control rounded-4'
+            })
+class LoginForm(StyledForm, AuthenticationForm):
     username=forms.CharField(widget=TextInput())
     password=forms.CharField(widget=PasswordInput())
     
 # - Create a record
 
-class CreateRecordForm(forms.ModelForm):
+class CreateRecordForm(StyledForm, forms.ModelForm):
 
     class Meta:
 
@@ -33,7 +54,7 @@ class CreateRecordForm(forms.ModelForm):
 
 # - Update a record
 
-class UpdateRecordForm(forms.ModelForm):
+class UpdateRecordForm(StyledForm, forms.ModelForm):
 
     class Meta:
 

@@ -8,13 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>{% block title %}Expenses{% endblock %}</title>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    
+    />
+    
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
   
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
     <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
     <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
@@ -23,22 +27,63 @@
       {% block content %}{% endblock %}
     </main>
 
-    <!-- JavaScript dependencies -->
-    <script src="{% static 'js/app.js'%}"></script>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 
 
+    <div class="container mt-3">
+
+      
+
+            {% for message in messages %}
+              <p class='alert alert-success float-center text-center message-text'>
 
 
+            <i class='fa fa-check' aria-hidden='true'><i>&nbsp,{{message}}
+            </p>
 
-    <script>
-      window.jQuery || document.write('<script src="{% static "js/vendor/jquery.slim.min.js" %}"><\/script>');
+            {% endfor %}
+     
+            </div>
+            <script>
+            setTimeout(function() {
+            const alerts = document.querySelectorAll('.message-text');
+            alerts.forEach(function(alert) {
+            alert.style.transition = 'opacity 0.5s ease-out';
+            alert.style.opacity = '0';
+          setTimeout(() => alert.remove(), 500);
+        });
+      }, 3000);
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.9.0/dist/feather.min.js"></script>
+
+    <!-- JavaScript dependencies -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+        crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" 
+        crossorigin="anonymous"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" 
+        
+        ></script>
+        
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js">
+        integrity="sha384-6XQ4Y+3S0z6+1p3d5kYz5w2Fz5x6v9b8n3k5l2p1q9r8s7t6u5v4w3x2y1z0a9b8"
+        crossorigin="anonymous"></script>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.9.0/dist/feather.min.js">
+        integrity="sha384-1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P7Q8R9S0T1U2V3W4X5Y6Z7A8B9C0D1E2F"
+        crossorigin="anonymous"></script>
+
+        <script src="{% static 'js/app.js'%}"></script>
+
+ 
+
+
+    
+   
     
     
 
