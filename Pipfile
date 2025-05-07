@@ -5,8 +5,9 @@ name = "pypi"
 
 [packages]
 django = "*"
-psycopg2-binary = "*"
 validate-email = "*"
+psycopg2-binary = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 
